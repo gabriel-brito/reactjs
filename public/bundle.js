@@ -10210,11 +10210,26 @@ var SearchUser = __webpack_require__(109);
 var GitHub = React.createClass({
 	displayName: 'GitHub',
 
+	getInitialState: function () {
+		return {
+			user: null,
+			repos: []
+		};
+	},
+	updateUser: function (user) {
+		this.setState({ user: user });
+	},
+	updateRepos: function (repos) {
+		this.setState({ repos: repos });
+	},
 	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'container' },
-			React.createElement(SearchUser, null)
+			React.createElement(SearchUser, {
+				updateUser: this.updateUser,
+				updateRepos: this.updateRepos
+			})
 		);
 	}
 
@@ -11098,12 +11113,12 @@ var SearchUser = React.createClass({
 
 	handleSubmit: function (e) {
 		e.preventDefault();
-
+		var self = this;
 		GitHubUser.getByUsername(this.refs.username.value).then(function (response) {
-			console.log(response);
+			self.props.updateUser(response.data);
 		});
 		GitHubUser.getReposByUsername(this.refs.username.value).then(function (response) {
-			console.log(response);
+			self.props.updateRepos(response.data);
 		});
 	},
 	render: function () {
