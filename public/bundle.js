@@ -11181,42 +11181,50 @@ module.exports = SearchUser;
 /***/ (function(module, exports, __webpack_require__) {
 
 var React = __webpack_require__(26);
+var UserRepos = __webpack_require__(216);
 
 function UserInfo(props) {
 	var userinfo = props.user ? React.createElement(
-		"div",
-		{ className: "row" },
+		'div',
+		{ className: 'row' },
 		React.createElement(
-			"div",
-			{ className: "col-lg-4" },
-			React.createElement("img", { className: "img-circle", src: props.user.avatar_url, alt: "avatar", width: "140", height: "140" }),
+			'div',
+			{ className: 'col-lg-4' },
+			React.createElement('img', { className: 'img-circle', src: props.user.avatar_url, alt: 'avatar', width: '140', height: '140' }),
 			React.createElement(
-				"h2",
+				'h2',
 				null,
 				props.user.login
 			),
 			React.createElement(
-				"p",
+				'p',
 				null,
 				props.user.name
 			),
 			React.createElement(
-				"p",
+				'p',
 				null,
-				"Followers: ",
+				'Followers: ',
 				props.user.followers,
-				" / Following: ",
+				' / Following: ',
 				props.user.following
 			),
 			React.createElement(
-				"p",
+				'p',
 				null,
 				React.createElement(
-					"a",
-					{ className: "btn btn-default", href: "{this.props.user.html_url}", role: "button" },
-					"View Details"
+					'a',
+					{ className: 'btn btn-default', href: '{this.props.user.html_url}', role: 'button' },
+					'View Details'
 				)
 			)
+		),
+		React.createElement(
+			'div',
+			{ className: 'col-lg-8' },
+			React.createElement(UserRepos, {
+				repos: props.repos
+			})
 		)
 	) : null;
 
@@ -25780,6 +25788,69 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var React = __webpack_require__(26);
+
+var UserRepos = React.createClass({
+	displayName: "UserRepos",
+
+	render: function () {
+		var repos = this.props.repos.map(function (repo, key) {
+			return React.createElement(
+				"div",
+				{ key: key, className: "thumbnail" },
+				React.createElement(
+					"div",
+					{ className: "caption" },
+					React.createElement(
+						"h3",
+						null,
+						repo.name,
+						React.createElement(
+							"span",
+							{ className: "badge" },
+							repo.stargazers_count,
+							" STARS"
+						)
+					),
+					React.createElement(
+						"p",
+						null,
+						repo.description
+					),
+					React.createElement(
+						"p",
+						null,
+						React.createElement(
+							"a",
+							{ href: repo.html_url, className: "btn btn-primary", role: "button" },
+							"Repository"
+						),
+						React.createElement(
+							"a",
+							{ href: repo.html_url + '/issues', className: "btn btn-default", role: "button" },
+							"Issues (",
+							repo.open_issues,
+							") "
+						)
+					)
+				)
+			);
+		});
+
+		return React.createElement(
+			"div",
+			null,
+			repos
+		);
+	}
+});
+
+module.exports = UserRepos;
 
 /***/ })
 /******/ ]);
