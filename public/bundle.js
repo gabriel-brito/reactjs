@@ -11169,6 +11169,11 @@ var SearchUser = React.createClass({
 	}
 });
 
+SearchUser.propTypes = {
+	updateUser: React.PropTypes.func.isRequired,
+	updateRepos: React.PropTypes.func.isRequired
+};
+
 module.exports = SearchUser;
 
 /***/ }),
@@ -11216,7 +11221,12 @@ function UserInfo(props) {
 	) : null;
 
 	return userinfo;
-}
+};
+
+UserInfo.propTypes = {
+	user: React.PropTypes.object,
+	repos: React.PropTypes.array
+};
 
 module.exports = UserInfo;
 
