@@ -25798,6 +25798,14 @@ var React = __webpack_require__(26);
 var UserRepos = React.createClass({
 	displayName: "UserRepos",
 
+	getInitialState: function () {
+		return {
+			reposCount: 0
+		};
+	},
+	componentWillReceiveProps: function (props) {
+		this.setState({ reposCount: props.repos.length });
+	},
 	render: function () {
 		var repos = this.props.repos.map(function (repo, key) {
 			return React.createElement(
@@ -25845,6 +25853,12 @@ var UserRepos = React.createClass({
 		return React.createElement(
 			"div",
 			null,
+			React.createElement(
+				"h2",
+				null,
+				this.state.reposCount,
+				" Repositories"
+			),
 			repos
 		);
 	}
