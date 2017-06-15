@@ -1,20 +1,20 @@
 var React = require('react');
 var UserRepos = require('./UserRepos');
 
-function UserInfo(props){
-	var userinfo = props.user ?
+const UserInfo = ({user, repos}) => {
+	var userinfo =user ?
 	(
 		<div className="row">
 			<div className="col-lg-4">
-				<img className="img-circle" src={props.user.avatar_url} alt="avatar" width="140" height="140"/>
-				<h2>{props.user.login}</h2>
-				<p>{props.user.name}</p>
-				<p>Followers: {props.user.followers} / Following: {props.user.following}</p>
-				<p><a className="btn btn-default" href="{this.props.user.html_url}" role="button">View Details</a></p>
+				<img className="img-circle" src={user.avatar_url} alt="avatar" width="140" height="140"/>
+				<h2>{user.login}</h2>
+				<p>{user.name}</p>
+				<p>Followers: {user.followers} / Following: {user.following}</p>
+				<p><a className="btn btn-default" href="{user.html_url}" role="button">View Details</a></p>
 			</div>
 			<div className="col-lg-8">
 				<UserRepos 
-				repos={props.repos}
+				repos={repos}
 				/>
 			</div>
 		</div>
